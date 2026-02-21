@@ -11,7 +11,7 @@ __version__ = gs.__version__
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "Genesis"
+project = "Genesis 中文文档"
 copyright = "2024, Genesis Developers"
 author = "Genesis Developers"
 release = __version__
@@ -47,6 +47,7 @@ templates_path = ["_templates"]
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
+html_title = "Genesis 中文文档"
 html_theme = "pydata_sphinx_theme"
 html_logo = "_static/bigger_text.png"
 html_favicon = "_static/option2_shadow_1.svg"
