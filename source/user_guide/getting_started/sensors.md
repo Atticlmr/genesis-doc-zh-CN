@@ -179,7 +179,8 @@ IMU 以**命名元组**的形式返回数据，字段包括：
 ```{figure} ../../_static/images/contact_force_sensor.png
 ```
 
-运动学接触探针传感器
+## 运动学接触探针传感器
+
 KinematicContactProbe 是一种触觉传感器，它沿着与刚体实体链接关联的"探针"点查询接触深度。与上述从物理求解器获取力的接触传感器不同，此传感器纯粹基于接触穿透深度来估算力：F = 刚度 * 穿透深度 * 探针法线。
 <video preload="auto" controls="True" width="100%">
 <source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/kin_probe_data.mp4" type="video/mp4">

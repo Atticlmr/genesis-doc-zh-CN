@@ -15,9 +15,9 @@ sphinx-togglebutton
 sphinx_design
 psutil
 scikit-image
-taichi == 1.7.2
-pydantic == 2.7.1
-numpy == 1.26.4
+quadrants
+pydantic
+numpy
 six
 PyOpenGL
 freetype-py
@@ -25,9 +25,9 @@ pyglet
 libigl
 pygltflib
 mujoco
+frozendict
 pycollada
 opencv-python
-lxml
 tetgen
 screeninfo
 PyGEL3D
