@@ -1,6 +1,5 @@
 # 📝 指南
 
-（持续更新中）
 - 尽可能使用 genesis.tensor。注意，当我们将 genesis tensor 传递给 Quadrants kernels 时，调用 tensor.assert_contiguous() 检查它是否连续，因为 Quadrants 只支持连续的外部 tensor。
 - 不要向用户暴露任何与 Quadrants 相关的用法。
 - 当您添加新类时，也实现 `__repr__()` 以便于交互式调试。（参见 genesis/engine/states.py 作为示例）

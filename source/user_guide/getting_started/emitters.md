@@ -109,3 +109,7 @@ for step in range(500):
 - 发射器必须在 `scene.build()` 之前添加
 - 当达到 `max_particles` 时粒子会循环使用
 - 与可微仿真不兼容（`requires_grad=True`）
+
+## 下一章节
+- [悬停环境](./hover_env) — 创建无人机悬停强化学习环境
+- [运动控制](./locomotion) — 使用Genesis和强化学习训练locomotion策略

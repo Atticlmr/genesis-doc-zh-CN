@@ -228,3 +228,9 @@ depth_camera.read_image() # 返回形状为（高，宽）的距离张量
 <video preload="auto" controls="True" width="100%">
 <source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/depth_camera.mp4" type="video/mp4">
 </video>
+
+## 下一章节
+
+- [相机传感器](./camera_sensors) — RGB、深度、分割和法线渲染
+- [射线投射器模式](./raycaster_patterns) — 配置 LiDAR 和深度相机射线模式
+- [记录器](./recorders) — 录制传感器数据以及仿真视频

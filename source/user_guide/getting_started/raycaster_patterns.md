@@ -133,3 +133,8 @@ scene.build(n_envs=4)
 data = lidar.read()
 print(data.points.shape)  # (4, n_h, n_v, 3) 用于批处理环境
 ```
+
+## 下一章节
+
+- [传感器](./sensors) — 接触、触觉、接近、IMU 和温度传感器
+- [相机传感器](./camera_sensors) — RGB、深度、分割和法线渲染

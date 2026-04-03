@@ -129,3 +129,8 @@ Genesis 自动执行：
 - 软体材质必须是基于 MPM 的（`gs.materials.MPM.*`）
 - 较高的 `damping` 可减少振荡
 - 需要具有适当边界的 `mpm_options`
+
+## 下一章节
+
+- [软体机器人](./soft_robots) — 用于 FEM 和 MPM 软体的肌肉驱动
+- [超越刚体](./beyond_rigid_bodies) — 流体、布料和可变形体仿真

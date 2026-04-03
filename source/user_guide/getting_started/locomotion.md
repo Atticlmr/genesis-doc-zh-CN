@@ -57,7 +57,7 @@ Genesis 支持并行仿真，非常适合高效地训练强化学习（RL）运�
 
 在这个阶段，我们已经定义了环境。现在，我们使用 rsl-rl 的 PPO 实现来训练策略。首先，通过 `pip` 安装所有 Python 依赖项：
 ```
-pip install tensorboard rsl-rl-lib==2.2.4
+pip install tensorboard "rsl-rl-lib>=5.0.0"
 ```
 安装后，通过运行以下命令开始训练：
 ```

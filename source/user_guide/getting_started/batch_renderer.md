@@ -108,3 +108,8 @@ colored = scene.visualizer.colorize_seg_idxc_arr(seg)
 - 推荐使用 `use_rasterizer=True` 以获得更高速度
 - 使用 `scene.render_all_cameras()` 批量渲染所有相机
 - 典型设置：256x256 分辨率，128-256 个环境
+
+## 下一章节
+
+- [相机传感器](./camera_sensors) — 单一环境下相机设置，后端以及渲染模式
+- [并行仿真](./parallel_simulation) — 运行并行仿真用于强化学习训练

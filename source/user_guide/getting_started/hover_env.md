@@ -66,7 +66,7 @@ Genesis 支持并行仿真，非常适合高效地训练强化学习（RL）无�
     首先，确保您已安装 Genesis，然后使用 `pip` 添加所有必需的 Python 依赖项：
     ```bash
     pip install --upgrade pip
-    pip install tensorboard rsl-rl-lib==2.2.4
+    pip install tensorboard "rsl-rl-lib>=5.0.0"
     ```
 2. **运行训练脚本**。
     使用提供的训练脚本开始训练策略。

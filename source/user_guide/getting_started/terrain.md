@@ -99,8 +99,8 @@ scene.build(n_envs=100)  # 您仍然可以运行多个并行环境
 有时您已经有一个详细的 CAD 或摄影测量网格，只是希望碰撞检测运行得更快。辅助函数 `genesis.utils.terrain.mesh_to_heightfield` 使用垂直光线采样网格，并返回一个 NumPy 高度数组以及网格坐标。
 
 ```python
-from genesis.utils.terrain import mesh_to_heightfield
 import os
+from genesis.utils.terrain import mesh_to_heightfield
 
 # 您的 .obj / .glb / .stl 地形文件路径
 mesh_path = os.path.join(gs.__path__[0], "assets", "meshes", "terrain_45.obj")

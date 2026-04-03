@@ -31,7 +31,7 @@
 **设置：**
 
 ```bash
-pip install tensorboard rsl-rl-lib==2.2.4
+pip install tensorboard "rsl-rl-lib>=5.0.0"
 ```
 
 **训练：**

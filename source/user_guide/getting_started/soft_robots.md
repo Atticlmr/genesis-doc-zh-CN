@@ -274,3 +274,9 @@ for i in range(1000):
 * 默认情况下，我们根据骨骼的形状生长皮肤，由 `morph` 指定（在此示例中为 `urdf/simple/two_link_arm.urdf`）。`gs.materials.Hybrid` 的参数 `func_instantiate_soft_from_rigid` 具体定义了皮肤应如何基于刚体 `morph` 生长。在 [genesis/engine/entities/hybrid_entity.py](https://github.com/Genesis-Embodied-AI/Genesis/tree/main/genesis/engine/entities/hybrid_entity.py) 中有一个默认实现 `default_func_instantiate_soft_from_rigid`。您也可以实现自己的函数。
 * 当 `morph` 是 `Mesh` 而不是 `URDF` 时，网格指定软体外层，内部骨骼基于皮肤形状生长。这由 `func_instantiate_rigid_from_soft` 定义。也有一个默认实现 `default_func_instantiate_rigid_from_soft`，它基本上实现了 3D 网格的骨架化。
 * `gs.materials.Hybrid` 的参数 `func_instantiate_rigid_soft_association` 决定每个骨骼部分如何与皮肤关联。默认实现是找到软皮肤中距离刚体骨骼部分最近的粒子。
+
+
+## 下一章节
+
+- [混合实体](./hybrid_entity) — 从 URDF 或网格创建刚-软混合实体
+- [超越刚体](./beyond_rigid_bodies) — 流体、布料和可变形体仿真

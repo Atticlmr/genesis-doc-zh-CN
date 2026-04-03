@@ -105,3 +105,9 @@ scene = gs.Scene(
 2. 在每个回合重置时应用位置/指令 DR
 3. 使用 `envs_idx` 参数进行选择性随机化
 4. 确保张量形状匹配 `(n_envs, ...)`
+
+
+## 下一章节
+
+- [并行仿真](./parallel_simulation) — 运行并行仿真用于强化学习训练
+- [运动控制](./locomotion) — 在locomotion端到端控制策略中使用域随机化

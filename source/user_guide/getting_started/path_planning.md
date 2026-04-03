@@ -97,3 +97,8 @@ path, valid = robot.plan_path(
 - 减少 `resolution` 以获得更平滑的路径
 - 使用 `timeout` 和 `max_retry` 以提高可靠性
 - `RRTConnect` 通常比 `RRT` 更快
+
+## 下一章节
+
+- [逆运动学和运动规划](./inverse_kinematics_motion_planning) — IK 求解和拾取放置工作流
+- [约束](./constraints) — 运行时焊接和连接约束以锁定连杆

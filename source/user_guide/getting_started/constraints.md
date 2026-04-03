@@ -100,4 +100,8 @@ print(constraints)  # 活动约束对
 - **Weld**: 完整 6-DOF 约束（平移 + 旋转）
 - **Connect**: 3-DOF 约束（仅平移）
 - **即时**: 无受力限制或顺应性
-- **运行时**: 可以动态添加/移除
+- **运行时**: 可以动态添加/移
+
+## 下一章节
+- [控制您的机器人](./control_your_robot) — 关节控制，位置，速度和力控
+- [逆运动学和运动规划](./inverse_kinematics_motion_planning) — IK求解和 pick-and-place 工作流
