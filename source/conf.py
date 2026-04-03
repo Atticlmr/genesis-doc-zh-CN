@@ -1,6 +1,13 @@
 import os
+import sys
+# Prefer local source: add monorepo root (two levels up) if it contains `genesis/`
+_local_repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, os.pardir))
+if os.path.isdir(os.path.join(_local_repo_root, "genesis")):
+    sys.path.insert(0, _local_repo_root)
 import genesis as gs
 
+# We need to initialize Genesis before we can import any of it's classes to document
+gs.init(backend=gs.cpu)
 
 __version__ = gs.__version__
 # Configuration file for the Sphinx documentation builder.
@@ -11,8 +18,8 @@ __version__ = gs.__version__
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "Genesis 中文文档"
-copyright = "2024, Genesis Developers"
+project = "Genesis"
+copyright = "2024-2026, Genesis Developers"
 author = "Genesis Developers"
 release = __version__
 version = __version__
@@ -32,11 +39,11 @@ extensions = [
     "sphinx_subfigure",
     "sphinxcontrib.video",
     "sphinx_togglebutton",
-    "sphinx_design"
+    "sphinx_design",
 ]
 
 # https://myst-parser.readthedocs.io/en/latest/syntax/optional.html
-myst_enable_extensions = ["colon_fence", "dollarmath"]
+myst_enable_extensions = ["colon_fence", "dollarmath", "amsmath", "dollarmath"]
 # https://github.com/executablebooks/MyST-Parser/issues/519#issuecomment-1037239655
 myst_heading_anchors = 4
 
@@ -47,7 +54,6 @@ templates_path = ["_templates"]
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_title = "Genesis 中文文档"
 html_theme = "pydata_sphinx_theme"
 html_logo = "_static/bigger_text.png"
 html_favicon = "_static/option2_shadow_1.svg"
@@ -62,6 +68,23 @@ html_theme_options = {
     "logo": {
         "image_dark": "_static/bigger_text_white.png",
     },
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/Genesis-Embodied-AI/Genesis",
+            "icon": "fa-brands fa-github",
+        },
+        {
+            "name": "Discord",
+            "url": "https://discord.gg/nukCuhB47p",
+            "icon": "fa-brands fa-discord",
+        },
+        {
+            "name": "PyPI",
+            "url": "https://pypi.org/project/genesis-world/",
+            "icon": "fa-brands fa-python",
+        },
+    ],
     "navbar_center": ["version-switcher", "navbar-nav"],
     "show_version_warning_banner": False,
     "switcher": {
@@ -76,16 +99,16 @@ html_context = {
     "github_repo": "genesis-doc",
     "github_version": "main",
     "conf_py_path": "/source/",
-    "doc_path": "/source"
+    "doc_path": "/source",
 }
 html_css_files = [
-    'css/custom.css',
+    "css/custom.css",
 ]
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
 ### Autodoc configurations ###
 autodoc_typehints = "signature"
 autodoc_typehints_description_target = "all"
-autodoc_default_flags = ['members', 'show-inheritance', 'undoc-members']
+autodoc_default_flags = ["members", "show-inheritance", "undoc-members"]
 autodoc_member_order = "bysource"
 autosummary_generate = True
