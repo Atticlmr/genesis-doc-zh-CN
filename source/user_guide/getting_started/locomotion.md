@@ -80,11 +80,11 @@ python examples/locomotion/go2_eval.py
 您应该看到类似这样的 GUI：
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/locomotion_eval.mp4" type="video/mp4">
+<source src="../../_static/videos/locomotion_eval.mp4" type="video/mp4">
 </video>
 
 如果您身边恰好有一台真实的 Unitree Go2 机器人，您可以尝试部署该策略。玩得开心！
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/locomotion_real.mp4" type="video/mp4">
+<source src="../../_static/videos/locomotion_real.mp4" type="video/mp4">
 </video>

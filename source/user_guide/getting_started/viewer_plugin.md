@@ -77,7 +77,7 @@ scene.viewer.add_plugin(
 ```
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/viewer_plugin_mouse_spring.mp4" type="video/mp4">
+<source src="../../_static/videos/viewer_plugin_mouse_spring.mp4" type="video/mp4">
 </video>
 
 
@@ -176,5 +176,5 @@ scene.build()
 ```
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/viewer_plugin_mesh_point.mp4" type="video/mp4">
+<source src="../../_static/videos/viewer_plugin_mesh_point.mp4" type="video/mp4">
 </video>

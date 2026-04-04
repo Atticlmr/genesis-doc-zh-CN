@@ -103,7 +103,7 @@ python examples/manipulation/grasp_eval.py --stage=rl
 ```
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/manipulation_rl.mp4" type="video/mp4">
+<source src="../../_static/videos/manipulation_rl.mp4" type="video/mp4">
 </video>
 
 * **学生策略（CNN+MLP）：**
@@ -112,7 +112,7 @@ python examples/manipulation/grasp_eval.py --stage=rl
 python examples/manipulation/grasp_eval.py --stage=bc --record
 ```
 
-学生通过 Madrona 渲染的立体相机观察环境。<video preload="auto" controls="True" width="100%"> <source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/manipulation_stereo.mp4" type="video/mp4"> </video>
+学生通过 Madrona 渲染的立体相机观察环境。<video preload="auto" controls="True" width="100%"><source src="../../_static/videos/manipulation_stereo.mp4" type="video/mp4"></video>
 
 
 **日志与监控：**

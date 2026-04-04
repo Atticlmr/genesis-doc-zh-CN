@@ -165,7 +165,7 @@ IMU 以**命名元组**的形式返回数据，字段包括：
 - `ang_vel`：角速度，单位为 rad/s（3D 向量）
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/imu.mp4" type="video/mp4">
+<source src="../../_static/videos/imu.mp4" type="video/mp4">
 </video>
 
 ## 接触传感器
@@ -181,9 +181,7 @@ IMU 以**命名元组**的形式返回数据，字段包括：
 
 运动学接触探针传感器
 KinematicContactProbe 是一种触觉传感器，它沿着与刚体实体链接关联的"探针"点查询接触深度。与上述从物理求解器获取力的接触传感器不同，此传感器纯粹基于接触穿透深度来估算力：F = 刚度 * 穿透深度 * 探针法线。
-<video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/kin_probe_contact.mp4" type="video/mp4">
-</video>
+<video preload="auto" controls="True" width="100%"><source src="../../_static/videos/kin_probe_data.mp4" type="video/mp4"></video>
 带有遥操作控制的示例脚本可在 examples/sensors/kinematic_contact_probe.py 中找到，供您尝试使用。
 触觉探针网格可以轻松放置在机器人手或末端执行器上，以模拟触觉传感器的触觉像素（taxels）。
 
@@ -226,7 +224,7 @@ depth_camera.read_image() # 返回形状为（高，宽）的距离张量
 以下是运行 `python examples/sensors/lidar_teleop.py --pattern depth` 的效果：
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/depth_camera.mp4" type="video/mp4">
+<source src="../../_static/videos/depth_camera.mp4" type="video/mp4">
 </video>
 
 ## 下一章节

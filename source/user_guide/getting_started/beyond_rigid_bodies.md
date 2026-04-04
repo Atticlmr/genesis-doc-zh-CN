@@ -73,7 +73,7 @@ for i in range(horizon):
 一旦您成功运行此示例，您会看到水落下并在平面上扩散，但限制在求解器边界内：
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/sph_liquid.mp4" type="video/mp4">
+<source src="../../_static/videos/sph_liquid.mp4" type="video/mp4">
 </video>
 
 您可以通过以下方式获取实时粒子位置：
@@ -232,7 +232,7 @@ for i in range(horizon):
 预期的渲染结果：
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/mpm.mp4" type="video/mp4">
+<source src="../../_static/videos/mpm.mp4" type="video/mp4">
 </video>
 
 ## 使用 PBD 求解器进行布料仿真 <a id="pbd"></a>
@@ -317,7 +317,7 @@ for i in range(horizon):
 预期的渲染结果：
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/pbd_cloth.mp4" type="video/mp4">
+<source src="../../_static/videos/pbd_cloth.mp4" type="video/mp4">
 </video>
 
 

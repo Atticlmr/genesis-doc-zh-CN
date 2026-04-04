@@ -84,7 +84,7 @@ for i in range(1000):
 您会看到：
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/muscle.mp4" type="video/mp4">
+<source src="../../_static/videos/muscle.mp4" type="video/mp4">
 </video>
 
 与实例化常规可变形实体相比，大部分代码都非常标准。只有两个小区别实现了这个效果：
@@ -159,7 +159,7 @@ for i in range(1000):
 您会看到：
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/worm.mp4" type="video/mp4">
+<source src="../../_static/videos/worm.mp4" type="video/mp4">
 </video>
 
 这段代码片段中有几点值得注意：
@@ -265,7 +265,7 @@ for i in range(1000):
 您会看到：
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/hybrid_robot.mp4" type="video/mp4">
+<source src="../../_static/videos/hybrid_robot.mp4" type="video/mp4">
 </video>
 
 * 您可以使用材质 `gs.materials.Hybrid` 指定混合机器人，它由 `gs.materials.Rigid` 和 `gs.materials.MPM.Muscle` 组成。注意这里只支持 MPM，而且必须是 Muscle 类，因为混合材质在内部复用了为 `Muscle` 实现的 `muscle_group`。

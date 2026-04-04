@@ -40,7 +40,7 @@ scene.start_recording(
 ```
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/imu.mp4" type="video/mp4">
+<source src="../../_static/videos/imu.mp4" type="video/mp4">
 </video>
 
 有关当前可用的 recorders，请参阅 API 参考中的 RecorderOptions。更多 recorders 的使用示例可以在 `examples/sensors/` 中查看。

@@ -132,4 +132,4 @@ scene = gs.Scene(renderer=gs.renderers.BatchRenderer())
 
 - [批量渲染](./batch_renderer) — 用于强化学习训练的GPU加速的并行渲染GPU
 - [Raycast模式](./raycaster_patterns) — 雷达和深度相机模式配置
-- [传感器](./sensors) — 接触，探针，接近，IMU 和 温度传感器
+- [传感器](./sensors) — 接触，探针，接近，IMU 和 温度传感器running batched environments for RL training

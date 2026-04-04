@@ -104,7 +104,7 @@ Genesis 支持并行仿真，非常适合高效地训练强化学习（RL）无�
     评估脚本将可视化无人机的表现，如果设置了 `--record` 标志，则保存视频。
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/hover_env.mp4" type="video/mp4">
+<source src="../../_static/videos/hover_env.mp4" type="video/mp4">
 </video>
 
 通过遵循本教程，您将能够使用 Genesis 训练和评估一个基本的无人机悬停策略。玩得开心！

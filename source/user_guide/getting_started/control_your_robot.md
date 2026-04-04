@@ -158,7 +158,7 @@ for i in range(1250):
 如果一切正常，这就是您应该看到的：
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/control_your_robot.mp4" type="video/mp4">
+<source src="../../_static/videos/control_your_robot.mp4" type="video/mp4">
 </video>
 
 

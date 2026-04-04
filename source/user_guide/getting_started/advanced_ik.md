@@ -85,7 +85,7 @@ for i in range(0, 2000):
 这是您将要看到的：
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/ik_multilink.mp4" type="video/mp4">
+<source src="../../_static/videos/ik_multilink.mp4" type="video/mp4">
 </video>
 
 以下是我们在本示例中希望您了解的一些新内容：
@@ -157,5 +157,5 @@ for i in range(0, 1000):
 处理并行环境时，您所要做的就是确保将额外的批处理维度插入到您的目标姿态变量中。
 
 <video preload="auto" controls="True" width="100%">
-<source src="https://github.com/Genesis-Embodied-AI/genesis-doc/raw/main/source/_static/videos/batched_IK.mp4" type="video/mp4">
+<source src="../../_static/videos/batched_IK.mp4" type="video/mp4">
 </video>
