@@ -2,7 +2,7 @@
 
 Genesis 为刚体提供了高效、功能丰富的碰撞检测和接触生成管线。Python 实现位于 `genesis/engine/solvers/rigid/collider_decomp.py`。本页提供对算法构建块的*概念性*概述，以便您理解、扩展或调试代码。
 
-> **范围。** 重点在于刚体-刚体交互。软体/粒子碰撞依赖于其他求解器，位于 `genesis/engine/coupler.py` 等文件中。
+> **范围：** 本文重点介绍刚体-刚体交互。软体/粒子碰撞由其他求解器处理，相关代码位于 `genesis/engine/coupler.py` 等文件中。
 
 ---
 
@@ -26,7 +26,7 @@ collider.detection()  # 更新 AABB → SAP 粗阶段 → 精阶段
 
 ## 1 · AABB 更新
 
-辅助内核 `_func_update_aabbs()` 将工作委托给 `RigidSolver._func_update_geom_aabbs()`。它为每个几何体计算一个*紧密的*世界空间 AABB，并将结果存储在 `geoms_state[..].aabb_min / aabb_max` 中。
+辅助内核 `_func_update_aabbs()` 将工作委托给 `RigidSolver._func_update_geom_aabbs()` 完成。它为每个几何体计算一个*紧密的*世界空间 AABB，并将结果存储在 `geoms_state[..].aabb_min / aabb_max` 中。
 
 为什么每帧都要做这件事？
 

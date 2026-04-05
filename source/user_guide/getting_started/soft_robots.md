@@ -94,7 +94,7 @@ for i in range(1000):
 
 默认情况下，只有一个肌肉横跨整个机器人身体，肌肉方向垂直于地面 `[0, 0, 1]`。
 
-在下一个示例中，我们展示如何通过设置肌肉组和方向来仿真蠕虫向前爬行，如下所示。（完整脚本可在 [tutorials/advanced_worm.py](https://github.com/Genesis-Embodied-AI/Genesis/tree/main/examples/tutorials/advanced_worm.py) 找到。）
+在下一个示例中，我们展示如何通过设置肌肉组和方向来仿真蠕虫向前爬行。（完整脚本可在 [tutorials/advanced_worm.py](https://github.com/Genesis-Embodied-AI/Genesis/tree/main/examples/tutorials/advanced_worm.py) 找到。）
 
 ```python
 ########################## entities ##########################
@@ -268,7 +268,7 @@ for i in range(1000):
 <source src="../../_static/videos/hybrid_robot.mp4" type="video/mp4">
 </video>
 
-* 您可以使用材质 `gs.materials.Hybrid` 指定混合机器人，它由 `gs.materials.Rigid` 和 `gs.materials.MPM.Muscle` 组成。注意这里只支持 MPM，而且必须是 Muscle 类，因为混合材质在内部复用了为 `Muscle` 实现的 `muscle_group`。
+* 您可以使用材质 `gs.materials.Hybrid` 指定混合机器人，它由 `gs.materials.Rigid` 和 `gs.materials.MPM.Muscle` 组成。注意这里只支持 MPM，且必须使用 Muscle 类，因为混合材质在内部复用了为 `Muscle` 实现的 `muscle_group`。
 * 控制机器人时，由于驱动来自内部刚体骨骼，因此有类似于刚体机器人的接口，例如 `control_dofs_velocity`、`control_dofs_force`、`control_dofs_position`。此外，控制维度与内部骨骼的 DoF 相同（在上面的示例中为 2）。
 * 皮肤由内部骨骼的形状决定，其中 `thickness` 决定包裹骨骼时的皮肤厚度。
 * 默认情况下，我们根据骨骼的形状生长皮肤，由 `morph` 指定（在此示例中为 `urdf/simple/two_link_arm.urdf`）。`gs.materials.Hybrid` 的参数 `func_instantiate_soft_from_rigid` 具体定义了皮肤应如何基于刚体 `morph` 生长。在 [genesis/engine/entities/hybrid_entity.py](https://github.com/Genesis-Embodied-AI/Genesis/tree/main/genesis/engine/entities/hybrid_entity.py) 中有一个默认实现 `default_func_instantiate_soft_from_rigid`。您也可以实现自己的函数。

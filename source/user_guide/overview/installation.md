@@ -13,7 +13,7 @@ Genesis 设计为***跨平台***，支持的后端设备包括*CPU*、*CUDA GPU*
 
 <div style="text-align: center;">
 
-| 操作系统 | GPU 设备        | GPU 仿真 | CPU 仿真 | 交互式查看器 | 无头渲染 |
+| 操作系统 | GPU 设备        | GPU 仿真 | CPU 仿真 | 交互式查看器 | 无界面渲染 |
 | ------- | ----------------- | -------------- | -------------- | ---------------- | ------------------ |
 | Linux   | Nvidia            | ✅             | ✅             | ✅               | ✅                 |
 |         | AMD               | ✅             | ✅             | ✅               | ✅                 |
@@ -59,7 +59,7 @@ source ~/.bashrc
 
 ### 导入错误
 
-#### 'Genesis hasn't been initialized'
+#### 'Genesis hasn't been initialized'（Genesis 尚未初始化）
 
 Genesis 未初始化时，尝试导入任何引擎相关子模块将引发异常，例如：
 

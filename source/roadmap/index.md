@@ -12,10 +12,10 @@
     - 面部动画
     - 运动策略 (locomotion policy)
     - 操作策略 (manipulation policy)
-- 无边界 MPM 仿真，用于大规模环境
+- 用于大规模环境的无边界 MPM 仿真
 
 ## 期望功能，但目前尚未开始开发（欢迎贡献！）
-- Windows 平台上的查看器 (Viewer) 和无头渲染 (headless rendering)
+- Windows 平台上的查看器（Viewer）和无界面渲染（headless rendering）
 - 交互式 GUI 系统
 - 支持更多基于 MPM 的材料模型
 - 更多传感器类型

@@ -107,4 +107,4 @@ Genesis 支持并行仿真，非常适合高效地训练强化学习（RL）无�
 <source src="../../_static/videos/hover_env.mp4" type="video/mp4">
 </video>
 
-通过遵循本教程，您将能够使用 Genesis 训练和评估一个基本的无人机悬停策略。玩得开心！
+通过遵循本教程，您将能够使用 Genesis 训练和评估一个基本的无人机悬停策略。祝您使用愉快！

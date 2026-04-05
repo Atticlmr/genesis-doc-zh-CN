@@ -110,4 +110,4 @@ scene = gs.Scene(
 ## 下一章节
 
 - [并行仿真](./parallel_simulation) — 运行并行仿真用于强化学习训练
-- [运动控制](./locomotion) — 在locomotion端到端控制策略中使用域随机化
+- [运动控制](./locomotion) — 在运动控制端到端策略中使用域随机化

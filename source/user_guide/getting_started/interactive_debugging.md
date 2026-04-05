@@ -38,11 +38,11 @@ import IPython; IPython.embed()
 
 ```{figure} ../../_static/images/interactive_franka.png
 ```
-这里您将看到它所有的 `geoms` 和 `links` 以及相关信息。我们可以再深入一层，输入 `franka.links[0]`：
+在这里您将看到所有的 `geoms`、`links` 以及相关信息。我们可以再深入一层，输入 `franka.links[0]`：
 
 
 ```{figure} ../../_static/images/interactive_link.png
 ```
-在这里，您将看到 link 中包含的所有碰撞几何体（`geoms`）和视觉几何体（`vgeoms`），以及其他重要信息，例如其 `intertial_mass`、link 在场景中的全局索引（`idx`）、它属于哪个实体（`entity`，即 franka 机械臂实体）、其关节（`joint`）等。
+在这里，您将看到 link 中包含的所有碰撞几何体（`geoms`）和视觉几何体（`vgeoms`），以及其他重要信息，例如其 `inertial_mass`、link 在场景中的全局索引（`idx`）、所属实体（`entity`，即 franka 机械臂实体）、其关节（`joint`）等。
 
 我们希望这个信息丰富的界面能让您的调试过程更轻松！

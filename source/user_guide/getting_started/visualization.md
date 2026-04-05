@@ -38,8 +38,8 @@ cam_pose = scene.viewer.camera_pose
 scene.viewer.set_camera_pose(cam_pose)
 ```
 
-## 相机与无头渲染
-现在让我们手动向场景添加一个相机对象。相机不连接到查看器或显示器，仅在您需要时返回渲染的图像。因此，相机可以在无头模式下工作。
+## 相机与无界面渲染
+现在让我们手动向场景添加一个相机对象。相机不连接到查看器或显示器，仅在您需要时返回渲染的图像。因此，相机可以在无界面模式下工作。
 
 ```python
 cam = scene.add_camera(
@@ -87,7 +87,7 @@ for i in range(120):
 # 停止录制并保存视频。如果未指定 `filename`，将使用调用者文件名自动生成名称。
 cam.stop_recording(save_to_filename='video.mp4', fps=60)
 ```
-您将把视频保存到 `video.mp4`：
+视频将被保存到 `video.mp4`：
 
 <video preload="auto" controls="True" width="100%">
 <source src="../../_static/videos/cam_record.mp4" type="video/mp4">

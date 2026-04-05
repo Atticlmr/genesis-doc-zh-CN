@@ -29,7 +29,7 @@ for i in range(1000):
 import genesis as gs
 gs.init(backend=gs.cpu)
 ```
-- **后端设备（Backend device）**：Genesis 设计为跨平台，支持各种后端设备。这里我们使用 `gs.cpu`。如果你需要 GPU 加速的[并行仿真](parallel_simulation.md)，可以切换到其他后端，如 `gs.cuda`、`gs.amdgpu` 或 `gs.metal`。你也可以使用 `gs.gpu` 作为快捷方式，Genesis 会根据你的系统选择合适的后端（例如，如果有 CUDA 可用则选择 `gs.cuda`，对于 Apple Silicon 设备则选择 `gs.metal`）。
+- **后端设备**：Genesis 设计为跨平台，支持各种后端设备。这里我们使用 `gs.cpu`。如果你需要 GPU 加速的[并行仿真](parallel_simulation.md)，可以切换到其他后端，如 `gs.cuda`、`gs.amdgpu` 或 `gs.metal`。你也可以使用 `gs.gpu` 作为快捷方式，Genesis 会根据你的系统选择合适的后端（例如，如果有 CUDA 可用则选择 `gs.cuda`，对于 Apple Silicon 设备则选择 `gs.metal`）。
 - **精度级别（Precision level）**：默认情况下，Genesis 使用 f32 精度。如果需要更高的精度，可以通过设置 `precision='64'` 切换到 f64。
 - **日志级别（Logging level）**：Genesis 初始化后，你会在终端看到日志输出，详细说明系统信息和 Genesis 相关信息，如当前版本。你可以通过将 `logging_level` 设置为 `'warning'` 来抑制日志输出。
 - **配色方案（Color scheme）**：Genesis 日志使用的默认配色主题针对深色背景终端进行了优化，即 `theme='dark'`。如果你使用的是浅色背景的终端，可以切换到 `'light'`，或者如果你只喜欢黑白配色，可以直接使用 `'dumb'`。
@@ -53,7 +53,7 @@ Genesis 中的所有对象、机器人、相机等都放置在一个 Genesis `Sc
 ```python
 scene = gs.Scene()
 ```
-一个场景包装了一个 `simulator` 对象，它处理所有底层的物理求解器，以及一个 `visualizer` 对象，它管理与可视化相关的概念。有关更多详细信息和 API，请参阅 [`Scene`](../../api_reference/scene/scene.md)。
+一个场景封装了一个 `simulator` 对象，它处理所有底层的物理求解器，以及一个 `visualizer` 对象，它管理与可视化相关的概念。有关更多详细信息和 API，请参阅 [`Scene`](../../api_reference/scene/scene.md)。
 
 创建场景时，你可以配置各种物理求解器参数。一个稍微复杂一点的例子是：
 ```python
@@ -82,7 +82,7 @@ franka = scene.add_entity(
 )
 ```
 在 Genesis 中，所有对象和机器人都表示为 [`Entity`](../../api_reference/entity/index.md)。Genesis 设计为完全面向对象，因此你可以直接通过这些实体对象的方法与它们交互，而不是使用分配给它们的句柄或全局 ID。
-`add_entity` 的第一个参数是 [`morph`](../../api_reference/options/morph/index.md)。在 Genesis 中，morph 是一个混合概念，封装了实体的几何和姿态信息。通过使用不同的 morph，你可以从形状基元、网格、URDF、MJCF、地形或软体机器人描述文件实例化 Genesis 实体。
+`add_entity` 的第一个参数是 [`morph`](../../api_reference/options/morph/index.md)。在 Genesis 中，morph 是一个融合概念，封装了实体的几何和姿态信息。通过使用不同的 morph，你可以从形状基元、网格、URDF、MJCF、地形或软体机器人描述文件实例化 Genesis 实体。
 
 创建 morph 时，你可以额外指定其位置、方向、大小等。对于方向，morph 接受 `euler`（scipy 外旋 x-y-z 约定）或 `quat`（w-x-y-z 约定）。一个示例是：
 ```python

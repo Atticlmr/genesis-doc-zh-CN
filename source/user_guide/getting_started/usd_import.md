@@ -1,6 +1,6 @@
 # 📦 加载 USD 场景
 
-Genesis 支持从 Universal Scene Description (USD) 文件加载复杂场景，使您能够导入具有正确物理属性和关节配置的铰接机器人、刚体对象和完整环境。USD 是由 Pixar 开发的开源框架，用于在 3D 世界中进行描述、合成、仿真和协作。
+Genesis 支持从 Universal Scene Description（USD）文件加载复杂场景，使您能够导入具有正确物理属性和关节配置的铰接机器人、刚体对象和完整环境。USD 是由 Pixar 开发的开源框架，用于在 3D 世界中进行描述、合成、仿真和协作。
 
 本教程将指导您在 Genesis 中加载 USD 文件、配置解析选项以及使用基于 USD 的场景。该解析器设计为与从 NVIDIA Isaac Sim 等流行工具导出的资源无缝协作，同时支持标准 USD 物理模式。
 
@@ -12,7 +12,7 @@ Genesis 支持从 Universal Scene Description (USD) 文件加载复杂场景，�
 pip install -e .[usd]
 ```
 
-### 可选：USD 材质烘焙
+### 可选：USD 材质烘焙（Material Baking）
 
 对于超越 `UsdPreviewSurface` 的高级材质解析，您可以选择性安装 Omniverse Kit 进行 USD 材质烘焙。此功能仅适用于 Python 3.10 和 3.11 以及 GPU 后端。（对于 Python 3.12，场景中大部分材质可能成功烘焙，但有些会保持未烘焙状态。）
 
