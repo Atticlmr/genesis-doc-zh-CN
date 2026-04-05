@@ -40,6 +40,7 @@ extensions = [
     "sphinxcontrib.video",
     "sphinx_togglebutton",
     "sphinx_design",
+    "sphinx_sitemap",  # SEO: 生成 sitemap.xml
 ]
 
 # https://myst-parser.readthedocs.io/en/latest/syntax/optional.html
@@ -100,11 +101,26 @@ html_context = {
     "github_version": "main",
     "conf_py_path": "/source/",
     "doc_path": "/source",
+    # SEO Meta 信息
+    "meta_description": "Genesis 物理AI平台中文文档 - 为通用机器人、具身智能和物理AI应用设计的物理仿真平台，提供通用物理引擎、轻量级仿真和照片级渲染。",
+    "meta_keywords": "Genesis, 物理仿真, 机器人仿真, 具身智能, 物理AI, Python仿真, MuJoCo替代, 机器人学习",
+    "site_author": "Atticlmr",
 }
+
+# -- SEO 优化配置 -------------------------------------------------
+# 站点地图配置
+html_baseurl = "https://genesis.osaerialrobot.top/"  # 你的实际域名
+sitemap_url_scheme = "{link}"
+sitemap_filename = "sitemap.xml"
+
+# HTML Meta 信息优化
+html_title = "Genesis 物理AI平台 - 中文文档"
+html_short_title = "Genesis 中文文档"
 html_css_files = [
     "css/custom.css",
 ]
 html_static_path = ["_static"]
+html_extra_path = ["robots.txt"]  # SEO: 将 robots.txt 复制到根目录
 
 ### Autodoc configurations ###
 autodoc_typehints = "signature"

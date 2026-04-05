@@ -55,6 +55,10 @@ pip install genesis-world
 
 ### 文档
 
+:::{note}
+本文档站点非官方站点，由 [GitHub@Atticlmr](https://github.com/Atticlmr) 翻译润色。
+:::
+
 请参阅我们的[文档站点](https://genesis.osaerialrobot.top/user_guide/index.html)了解详细的安装步骤、教程和 API 参考。
 
 ## 为 Genesis 贡献

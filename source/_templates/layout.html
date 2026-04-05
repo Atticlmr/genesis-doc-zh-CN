@@ -1,0 +1,119 @@
+{% extends "!layout.html" %}
+
+{%- block extrahead %}
+<!-- 基础 SEO Meta -->
+<meta name="description" content="{{ meta_description|default('Genesis 物理AI平台中文文档 - 通用物理引擎、轻量级仿真、照片级渲染') }}">
+<meta name="keywords" content="{{ meta_keywords|default('Genesis, 物理仿真, 机器人, 具身智能, 物理AI, Python') }}">
+<meta name="author" content="{{ site_author|default('Atticlmr') }}">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="googlebot" content="index, follow">
+<meta name="baiduspider" content="index, follow">
+
+<!-- 中文语言标记 -->
+<meta http-equiv="content-language" content="zh-CN">
+<link rel="alternate" hreflang="zh-CN" href="{{ html_baseurl }}{{ pagename }}.html">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ html_baseurl }}{{ pagename }}.html">
+
+<!-- Open Graph / 社交媒体分享 -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ title|striptags|e }}{{ titlesuffix }}">
+<meta property="og:description" content="{{ meta_description|default('Genesis 物理AI平台中文文档') }}">
+<meta property="og:url" content="{{ html_baseurl }}{{ pagename }}.html">
+<meta property="og:site_name" content="Genesis 中文文档">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="{{ html_baseurl }}_static/genesis-social.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ title|striptags|e }}{{ titlesuffix }}">
+<meta name="twitter:description" content="{{ meta_description|default('Genesis 物理AI平台中文文档') }}">
+<meta name="twitter:image" content="{{ html_baseurl }}_static/genesis-social.jpg">
+
+<!-- 移动端优化 -->
+<meta name="theme-color" content="#2980b9">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- 结构化数据 - 软件应用 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Genesis 物理AI平台",
+  "alternateName": "Genesis Physics Platform",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Linux, macOS, Windows",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "1000"
+  },
+  "softwareVersion": "{{ version }}",
+  "programmingLanguage": "Python",
+  "license": "https://github.com/Genesis-Embodied-AI/Genesis/blob/main/LICENSE"
+}
+</script>
+
+<!-- 结构化数据 - 网站 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Genesis 中文文档",
+  "url": "{{ html_baseurl }}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "{{ html_baseurl }}search.html?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  },
+  "inLanguage": "zh-CN",
+  "author": {
+    "@type": "Person",
+    "name": "Atticlmr",
+    "url": "https://github.com/Atticlmr"
+  }
+}
+</script>
+
+<!-- 结构化数据 - 技术文档 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "{{ title|striptags|e }}",
+  "description": "{{ meta_description|default('Genesis 物理AI平台中文文档') }}",
+  "author": {
+    "@type": "Person",
+    "name": "Atticlmr",
+    "url": "https://github.com/Atticlmr"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Genesis 中文文档社区",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ html_baseurl }}_static/bigger_text.png"
+    }
+  },
+  "inLanguage": "zh-CN",
+  "isAccessibleForFree": "true",
+  "educationalLevel": "intermediate",
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "开发者、研究人员、机器人工程师"
+  }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,3 @@
+# Ads.txt for Genesis Chinese Documentation
+# 如果未来需要添加广告，可在此配置
+# placeholder

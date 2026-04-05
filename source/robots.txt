@@ -1,0 +1,35 @@
+# robots.txt for Genesis Chinese Documentation
+# https://genesis.osaerialrobot.top/
+
+User-agent: *
+Allow: /
+
+# 禁止抓取源代码和静态资源（提高爬虫效率）
+Disallow: /_sources/
+Disallow: /_static/js/
+Disallow: /_static/css/
+
+# 允许抓取重要静态资源
+Allow: /_static/*.png
+Allow: /_static/*.jpg
+Allow: /_static/*.svg
+Allow: /_static/*.gif
+
+# 站点地图
+Sitemap: https://genesis.osaerialrobot.top/sitemap.xml
+
+# 爬虫频率限制
+Crawl-delay: 1
+
+# 特定爬虫优化
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
