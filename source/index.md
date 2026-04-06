@@ -61,6 +61,35 @@ pip install genesis-world
 
 请参阅我们的[文档站点](https://genesis.osaerialrobot.top/user_guide/index.html)了解详细的安装步骤、教程和 API 参考。
 
+### LLM友好文档获取(Beta)
+
+:::{note}
+本文档站点非官方站点，由 [GitHub@Atticlmr](https://github.com/Atticlmr) 制作
+问题反馈：https://github.com/Atticlmr/genesis-doc-zh-CN/issues
+:::
+请将以下提示词输入大模型即可使用
+
+```bash
+
+LLm友好文档地址:https://genesis.osaerialrobot.top/llm_docs/
+### 使用方法
+1. **先读取索引**了解文档结构：
+   ```
+   https://genesis.osaerialrobot.top/llm_docs/00_INDEX.txt
+   ```
+2. **按需加载模块**（不要一次性加载全部，避免上下文过长）：
+   - 新手入门 → 01_intro + 02_getting_started
+   - 机器人控制 → 03_robot_control
+   - 物理仿真 → 04_physics_simulation + 09_advanced_topics
+   - API 查询 → 10_api_core 及之后的模块
+3. **获取具体模块**（示例）：
+   ```
+   https://genesis.osaerialrobot.top/llm_docs/02_getting_started_入门指南_基础.txt
+   ```
+### 编码说明
+文档使用 UTF-8 编码，获取时请确保使用正确的编码方式解析。
+```
+
 ## 为 Genesis 贡献
 
 Genesis 项目的目标是构建一个完全透明、用户友好的生态系统，让来自机器人和计算机图形学领域的贡献者能够**齐聚一堂，协作创建一个高效率、真实（包括物理和视觉）的虚拟世界，用于机器人研究及其他领域**。
