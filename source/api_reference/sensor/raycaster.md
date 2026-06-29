@@ -1,15 +1,15 @@
 # 射线投射传感器
 
-`RaycasterSensor` 提供基于射线的距离测量，可用于 LIDAR 仿真、接近传感和障碍物检测。
+`RaycasterSensor` 提供基于射线的距离测量，可用于 LiDAR 仿真、深度相机、接近感知和障碍物检测。
 
 ## 概述
 
 射线投射传感器：
 
-- 从连杆的坐标系向场景中投射射线
-- 返回与几何体相交的距离
-- 支持可配置的射线模式（线性、平面、自定义）
-- 使用 GPU 加速的 BVH 遍历高效计算
+- 从传感器坐标系向场景中投射射线。
+- 返回与几何体相交的命中点和距离。
+- 支持可配置的射线模式，例如球面、深度相机和平面网格。
+- 使用 GPU 加速的 BVH 遍历高效计算。
 
 ## 用法
 
@@ -19,109 +19,95 @@ import genesis as gs
 gs.init()
 scene = gs.Scene()
 robot = scene.add_entity(gs.morphs.URDF(file="robot.urdf"))
-scene.add_entity(gs.morphs.Box(pos=(2, 0, 0.5)))  # 障碍物
-scene.build()
+scene.add_entity(gs.morphs.Box(pos=(2, 0, 0.5), size=(1.0, 1.0, 1.0)))
+sensor_link = robot.get_link("sensor_link")
 
-# 添加射线投射传感器（使用 Lidar 选项）
 lidar = scene.add_sensor(
     gs.sensors.Lidar(
-        link=robot.get_link("sensor_link"),
+        pattern=gs.sensors.SphericalPattern(
+            fov=(360.0, 30.0),
+            n_points=(1800, 16),
+        ),
+        entity_idx=robot.idx,
+        link_idx_local=sensor_link.idx_local,
+        max_range=10.0,
+        min_range=0.1,
+        return_world_frame=True,
     )
 )
 
-# 仿真循环
+scene.build()
+
 for i in range(100):
     scene.step()
-
-    # 获取距离数据
-    ranges = lidar.get_data()  # (n_rays,) 距离数组
-    print(f"Min range: {ranges.min():.2f} m")
+    data = lidar.read()
+    print(data.distances.min())
 ```
 
 ## 配置
 
 ```python
-gs.sensors.Raycaster(
-    link=link,              # 附加传感器的 RigidLink
-    n_rays=360,             # 投射的射线数量
-    min_range=0.1,          # 最小检测范围 (m)
-    max_range=10.0,         # 最大检测范围 (m)
-    pattern="circular",     # 射线模式类型
-
-    # 角度范围（用于圆形/线性模式）
-    fov_horizontal=360.0,   # 水平视场角 (度)
-    fov_vertical=0.0,       # 垂直视场角 (度)
-
-    # 相对于连杆坐标系的位置偏移
-    offset_pos=(0, 0, 0),
-    offset_quat=(0, 0, 0, 1),
+gs.sensors.Lidar(
+    pattern=pattern,
+    entity_idx=robot.idx,
+    link_idx_local=sensor_link.idx_local,
+    pos_offset=(0.0, 0.0, 0.0),
+    euler_offset=(0.0, 0.0, 0.0),
+    min_range=0.1,
+    max_range=100.0,
+    return_world_frame=True,
+    draw_debug=True,
 )
 ```
 
 ## 射线模式
 
-### 圆形（2D LIDAR）
+### SphericalPattern（LiDAR）
 
 ```python
-lidar_2d = robot.add_sensor(
-    gs.sensors.Raycaster(
-        link=base,
-        n_rays=360,
-        pattern="circular",
-        fov_horizontal=360.0,
-    )
+pattern = gs.sensors.SphericalPattern(
+    fov=(360.0, 60.0),
+    n_points=(128, 32),
 )
 ```
 
-### 平面（3D LIDAR）
+### DepthCameraPattern
 
 ```python
-lidar_3d = robot.add_sensor(
-    gs.sensors.Raycaster(
-        link=base,
-        n_rays=16 * 360,  # 16 个垂直层
-        pattern="planar",
-        fov_horizontal=360.0,
-        fov_vertical=30.0,
-    )
+pattern = gs.sensors.DepthCameraPattern(
+    res=(640, 480),
+    fov_horizontal=87.0,
 )
 ```
 
-### 自定义模式
+### GridPattern
 
 ```python
-import numpy as np
-
-# 定义自定义射线方向
-rays = np.array([
-    [1, 0, 0],    # 前方
-    [0, 1, 0],    # 左方
-    [-1, 0, 0],   # 后方
-    [0, -1, 0],   # 右方
-])
-
-sensor = robot.add_sensor(
-    gs.sensors.Raycaster(
-        link=base,
-        ray_directions=rays,
-    )
+pattern = gs.sensors.GridPattern(
+    resolution=0.1,
+    size=(2.0, 2.0),
+    direction=(0.0, 0.0, -1.0),
 )
 ```
 
 ## 输出格式
 
-| 输出 | 形状 | 描述 |
+`Lidar.read()` 和 `DepthCamera.read()` 返回 `RaycasterReturnType`：
+
+| 字段 | 形状 | 描述 |
 |--------|-------|-------------|
-| `ranges` | `(n_rays,)` | 到交点的距离（无碰撞时为 max_range） |
-| `hits` | `(n_rays,)` | 有效相交的布尔掩码 |
+| `points` | `([n_envs,] *shape, 3)` | 命中点坐标 |
+| `distances` | `([n_envs,] *shape)` | 到交点的距离；无命中时为 `max_range` |
+
+`DepthCamera` 还提供 `read_image()`，直接返回形状为 `([n_envs,] H, W)` 的深度图。
 
 ## 性能
 
-Raycaster 使用 GPU 加速的线性 BVH（LBVH）进行高效的射线-场景相交计算：
+Raycaster 使用 GPU 加速的 BVH 遍历进行射线-场景相交计算：
 
-- 随场景复杂度扩展良好
-- 可高效处理数百至数千条射线
-- 在并行环境中批处理
+- 随场景复杂度扩展良好。
+- 可高效处理数百到数千条射线。
+- 支持并行环境中的批处理。
 
 ## API 参考
 

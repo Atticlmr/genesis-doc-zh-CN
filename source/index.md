@@ -1,7 +1,6 @@
-# Genesis
+# Genesis World
 
-```{figure} _static/images/teaser.png
-```
+![Genesis World teaser](https://raw.githubusercontent.com/YilingQiao/Genesis/readme-assets/videos/HeroShot_Final.png)
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/Genesis-Embodied-AI/Genesis?style=plastic&logo=GitHub&logoSize=auto)](https://github.com/Genesis-Embodied-AI/Genesis)
 [![PyPI version](https://badge.fury.io/py/genesis-world.svg?icon=si%3Apython)](https://pypi.org/project/genesis-world/)
@@ -10,36 +9,30 @@
 <a href="https://drive.google.com/uc?export=view&id=1ZS9nnbQ-t1IwkzJlENBYqYIIOOZhXuBZ"><img src="https://img.shields.io/badge/WeChat-07C160?style=for-the-badge&logo=wechat&logoColor=white" height="20" style="display:inline"></a>
 
 
-## Genesis 是什么？
+## Genesis World 是什么？
 
-Genesis 是一个为通用*机器人/具身智能/物理AI*应用设计的物理平台。它同时具备以下特性：
+**Genesis World** 是面向物理 AI 开发的仿真平台。它把统一的多物理引擎、照片级真实渲染器 [Nyx](https://github.com/Genesis-Embodied-AI/genesis-nyx)，以及跨平台编译器 [Quadrants](https://github.com/Genesis-Embodied-AI/quadrants) 放在同一个 Pythonic 仿真接口之后。Genesis World 既能从单台笔记本上的 kernel 扩展到数据中心级 GPU，也保持了适合研究代码阅读、扩展和嵌入的接口。
 
-1. 一个从零开始重新构建的**通用物理引擎**，能够仿真各种材料和物理现象。
-2. 一个**轻量级**、**超高速**、**Pythonic**且**用户友好**的机器人仿真平台。
-3. 一个强大且快速的**照片级真实感渲染系统**。
-4. 一个**生成式数据引擎**，可将用户提示的自然语言描述转换为各种模态的数据。
+它以前名为 **Genesis**，最早是 2024 年 12 月启动的学术项目；现在其开发由 [Genesis AI](https://www.genesis.ai/) 正式支持。更多技术背景见我们的 [blog post](https://www.genesis.ai/blog/the-role-of-simulation-in-scalable-robotics-genesis-world-10-and-the-path-forward)。
 
-Genesis 基于从零开始重新设计和构建的通用物理引擎，将各种物理求解器及其耦合整合到一个统一的框架中。这个核心物理引擎进一步由上层运行的生成式代理框架增强，旨在实现机器人及其他领域完全**自动化的数据生成**。
-目前，我们正在开源底层物理引擎和仿真平台。生成式框架将在近期发布。
+Genesis World 包含四层。上层是你构建的机器人环境、机器学习流水线或智能体仿真；下层是你拥有的计算后端。
 
-Genesis 的构建和持续演进遵循以下***长期使命***：
-
-1. **降低**使用物理仿真的门槛，让机器人研究对每个人都可及。（参见我们的[承诺](https://genesis-world.readthedocs.io/en/latest/user_guide/overview/mission.html)）
-2. **将广泛的最先进物理求解器统一**到一个框架中，使用最先进的仿真技术，以最高的物理、视觉和感官保真度在虚拟世界中重现整个物理世界。
-3. **最小化**机器人及其他领域数据收集和生成的人力投入，让数据飞轮自行运转。
+- **Simulation Interface**：面向用户的 API，包括资产解析（URDF、MJCF、OBJ、GLB、USD 等）、实体访问器、控制器、传感器、并行/异构环境和内置 GUI。
+- **Physics**：统一的多物理引擎，集成 Rigid、FEM、MPM、Particle（PBD / SPH）、[uipc](https://github.com/spiriMirror/libuipc)、显式耦合器和 SAP，并共享同一个场景与状态。
+- **Render**：三条渲染路径都作为相机传感器接入：**[Nyx](https://github.com/Genesis-Embodied-AI/genesis-nyx)**（Genesis 自研、面向机器人任务的渲染器）、**Luisa**（DSL 光线追踪器）和 **Pyrender**（光栅化器）。
+- **Compiler**：**[Quadrants](https://github.com/Genesis-Embodied-AI/quadrants)** 会把 Python kernel code 降低到 CUDA、AMD ROCm、Apple Metal、Vulkan、x86 和 ARM64，并承载 Genesis World 的自动微分、GPU graphs 和 fastcache 机制。
 
 ## 核心特性
 
-与以往的仿真平台相比，以下是 Genesis 的几个核心特性：
+与以往的仿真平台相比，以下是 Genesis World 的几个核心特性：
 
-- 🐍 **100% Python**，前端接口和后端物理引擎都原生使用 Python 开发。
+- 🐍 **Pythonic** 且完全透明。Genesis World 使用 Python 开发并完全开源，使代码理解和贡献更容易。
 - 👶 **轻松安装**，API 设计**极其简单**且**用户友好**。
-- 🚀 **并行仿真**带来***前所未有的速度***：Genesis 是**世界上最快的物理引擎**，仿真速度比现有的*GPU 加速*机器人仿真器（Isaac Gym/Sim/Lab、Mujoco MJX 等）快***10~80 倍***（听起来可能有些不可思议），同时***不妥协***仿真精度和保真度。
+- 🚀 **并行仿真**带来***前所未有的速度***：Genesis World 是**世界上最快的物理引擎**，仿真速度比现有的*GPU 加速*机器人仿真器（Isaac Gym/Sim/Lab、Mujoco MJX 等）快***10~80 倍***，同时***不妥协***仿真精度和保真度。
 - 💥 **统一**框架支持各种最先进的物理求解器，建模**广泛的材料**和物理现象。
-- 📸 优化的照片级真实感光线追踪渲染。
-- 📐 **可微分性**：Genesis 设计为与可微分仿真完全兼容。目前，我们的 MPM 求解器和工具求解器是可微分的，其他求解器的可微分性将很快添加（从刚体仿真开始）。
-- ☝🏻 物理精确且可微分的**触觉传感器**。
-- 🌌 原生支持[生成式仿真](https://arxiv.org/abs/2305.10455)，允许**语言提示的数据生成**，包括各种模态：*交互式场景*、*任务提案*、*奖励*、*资产*、*角色动作*、*策略*、*轨迹*、*相机运动*、*（物理精确的）视频*等。
+- 📸 通过 [Nyx](https://github.com/Genesis-Embodied-AI/genesis-nyx) 提供照片级真实光线追踪渲染，并针对机器人应用优化性能。
+- 📐 **可微分性**：Genesis World 设计为与可微分仿真兼容，自动微分和反向传播基础设施由 [Quadrants](https://github.com/Genesis-Embodied-AI/quadrants) 提供。
+- ☝🏻 内置**完整传感器系统**：除了物理精确且可微的**触觉**传感器，还包括 **IMU**、**lidar**、**深度相机**、**接触力**、**表面距离**和**温度网格**传感器，均可直接用于并行和异构环境。
 
 ## 快速开始
 
@@ -121,6 +114,5 @@ Genesis 项目的目标是构建一个完全透明、用户友好的生态系统
 
 user_guide/index
 api_reference/index
-roadmap/index
 
 ```

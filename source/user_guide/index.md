@@ -41,6 +41,7 @@ getting_started/path_planning
 getting_started/beyond_rigid_bodies
 getting_started/soft_robots
 getting_started/hybrid_entity
+getting_started/drone_entity
 getting_started/terrain
 getting_started/emitters
 ```
@@ -48,25 +49,20 @@ getting_started/emitters
 
 ```{toctree}
 :caption: 传感和感知
-:maxdepth: 1
+:maxdepth: 2
 
-getting_started/sensors
-getting_started/camera_sensors
-getting_started/raycaster_patterns
-getting_started/batch_renderer
+getting_started/sensors/index
+getting_started/nyx_renderer
 getting_started/recorders
 ```
 
 
 ```{toctree}
-:caption: 强化学习训练
-:maxdepth: 1
+:caption: 策略训练
+:maxdepth: 2
 
-getting_started/locomotion
-getting_started/hover_env
-getting_started/drone_entity
-getting_started/manipulation
-getting_started/domain_randomization
+getting_started/policy_training/best_practices/index
+getting_started/policy_training/examples/index
 ```
 
 
@@ -81,33 +77,43 @@ getting_started/viewer_plugin
 
 
 ```{toctree}
-:caption: 配置和转换
+:caption: 配置和约定
 :maxdepth: 1
 
 getting_started/config_system
 getting_started/conventions
 getting_started/miscellaneous
-getting_started/misc_guidelines
 ```
 
 
 ```{toctree}
 :caption: 进阶话题
-:maxdepth: 1
+:maxdepth: 2
 
 advanced_topics/concepts
-advanced_topics/naming_and_variables
-advanced_topics/collision_contacts_forces
-advanced_topics/solvers_and_coupling
-advanced_topics/ipc_coupler
-advanced_topics/sap_coupler
-advanced_topics/rigid_constraint_model
-advanced_topics/nonrigid_models
-advanced_topics/support_field
+advanced_topics/couplers/index
 advanced_topics/checkpoints
-advanced_topics/mesh_processing
 advanced_topics/multi_gpu
-advanced_topics/profiling
+advanced_topics/mesh_processing
 ```
 
-<!-- advanced_topics/drone -->
+
+```{toctree}
+:caption: 理论和建模
+:maxdepth: 2
+
+advanced_topics/rigid_collision/index
+advanced_topics/solvers_and_coupling
+advanced_topics/nonrigid_models
+advanced_topics/support_field
+```
+
+
+```{toctree}
+:caption: 扩展 Genesis
+:maxdepth: 2
+
+advanced_topics/naming_and_variables
+advanced_topics/sensors/index
+advanced_topics/profiling
+```

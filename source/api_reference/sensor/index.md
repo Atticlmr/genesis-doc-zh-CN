@@ -1,17 +1,23 @@
 # Sensors
 
-Genesis 提供多种传感器用于感知仿真状态。Sensors 附加到 entities 上，提供视觉观测、力测量和惯性读数等数据。
+Genesis 提供多种传感器用于感知仿真状态。传感器会连接到实体或场景上，并返回视觉观测、接触、惯性、光线投射、接近距离和温度等数据。
 
 ## 概览
 
 可用的传感器类型：
 
-| Sensor | 描述 | 使用场景 |
-|--------|-------------|----------|
-| **Camera** | 视觉观测（RGB、深度、分割） | 基于视觉的控制 |
-| **ContactForceSensor** | 接触点的力/力矩 | 操作、抓取 |
-| **IMUSensor** | 加速度计和陀螺仪读数 | 机器人状态估计 |
-| **RaycasterSensor** | 基于射线的距离测量 | LIDAR、接近感应 |
+| Sensor | 返回类型 | 字段 | 形状 |
+|--------|-------------|--------|-------|
+| **Camera** | `CameraReturnType` | `rgb` (uint8) | `([n_envs,] h, w, 3)` |
+| **ContactSensor** | `torch.Tensor` (bool) | - | `([n_envs,] 1)` |
+| **ContactForceSensor** | `torch.Tensor` (float32) | - | `([n_envs,] 3)` |
+| **IMUSensor** | `IMUReturnType` | `lin_acc`, `ang_vel`, `mag` (float32) | 每个字段 `([n_envs,] 3)` |
+| **RaycasterSensor** | `RaycasterReturnType` | `points`, `distances` (float32) | `([n_envs,] *shape, 3)`, `([n_envs,] *shape)` |
+| **DepthCameraSensor** | `RaycasterReturnType` | `points`, `distances` (float32) | `([n_envs,] h, w, 3)`, `([n_envs,] h, w)` |
+| **ProximitySensor** | `torch.Tensor` (float32) | - | `([n_envs,] n_probes)` |
+| **KinematicContactProbe** | `KinematicContactProbeData` | `penetration`, `force` (float32) | `([n_envs,] n_probes)`, `([n_envs,] n_probes, 3)` |
+| **ElastomerDisplacementSensor** | `torch.Tensor` (float32) | - | `([n_envs,] n_probes, 3)` |
+| **TemperatureGridSensor** | `torch.Tensor` (float32) | - | `([n_envs,] nx, ny, nz)` |
 
 ## 快速开始
 
@@ -23,6 +29,8 @@ import genesis as gs
 gs.init()
 scene = gs.Scene()
 robot = scene.add_entity(gs.morphs.URDF(file="robot.urdf"))
+end_effector = robot.get_link("end_effector")
+base = robot.get_link("base_link")
 
 # Camera sensor（通过 add_camera）
 cam = scene.add_camera(
@@ -31,22 +39,23 @@ cam = scene.add_camera(
     lookat=(0, 0, 0.5),
 )
 
-# 首先 build scene
-scene.build()
-
-# 在末端执行器上的接触力 sensor
+# 末端执行器上的接触力 sensor
 contact_sensor = scene.add_sensor(
     gs.sensors.ContactForce(
-        link=robot.get_link("end_effector"),
+        entity_idx=robot.idx,
+        link_idx_local=end_effector.idx_local,
     )
 )
 
 # IMU sensor
 imu = scene.add_sensor(
     gs.sensors.IMU(
-        link=robot.get_link("base_link"),
+        entity_idx=robot.idx,
+        link_idx_local=base.idx_local,
     )
 )
+
+scene.build()
 ```
 
 ### 读取 Sensor 数据
@@ -55,16 +64,16 @@ imu = scene.add_sensor(
 scene.step()
 
 # Camera
-rgb = cam.render(rgb=True)
-depth = cam.render(depth=True)
+rgb, _, _, _ = cam.render(rgb=True)
+_, depth, _, _ = cam.render(depth=True)
 
 # 接触力
-force = contact_sensor.get_data()
+force = contact_sensor.read()
 
 # IMU
-imu_data = imu.get_data()
-acceleration = imu_data.linear_acceleration
-angular_velocity = imu_data.angular_velocity
+imu_data = imu.read()
+acceleration = imu_data.lin_acc
+angular_velocity = imu_data.ang_vel
 ```
 
 ## Sensor 类型

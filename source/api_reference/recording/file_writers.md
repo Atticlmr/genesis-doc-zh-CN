@@ -6,9 +6,9 @@ Genesis 提供文件写入器，用于将仿真数据导出到各种格式。
 
 | Writer | Format | Description |
 |--------|--------|-------------|
-| `CSVFileWriter` | `.csv` | 表格数据导出 |
-| `NPZFileWriter` | `.npz` | NumPy 压缩数组 |
-| `VideoFileWriter` | `.mp4` | 来自相机/视窗的视频 |
+| `CSVFile` | `.csv` | 表格数据导出 |
+| `NPZFile` | `.npz` | NumPy 压缩数组 |
+| `VideoFile` | `.mp4` | 来自相机/视窗的视频 |
 
 ## CSVFile
 
@@ -30,7 +30,7 @@ scene.start_recording(
         "q2": robot.get_qpos()[2],
     },
     rec_options=gs.recorders.CSVFile(
-        filepath="joint_data.csv",
+        filename="joint_data.csv",
         hz=100,
     ),
 )
@@ -52,7 +52,7 @@ scene.start_recording(
         "qvel": robot.get_qvel(),
     },
     rec_options=gs.recorders.NPZFile(
-        filepath="trajectory.npz",
+        filename="trajectory.npz",
         hz=50,
     ),
 )
@@ -78,9 +78,9 @@ cam = scene.add_camera(
 )
 
 scene.start_recording(
-    data_func=lambda: cam.render(rgb=True),
+    data_func=lambda: cam.render(rgb=True)[0],
     rec_options=gs.recorders.VideoFile(
-        filepath="simulation.mp4",
+        filename="simulation.mp4",
     ),
 )
 
@@ -95,7 +95,7 @@ scene.stop_recording()
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `filepath` | str | Required | 输出文件路径 |
+| `filename` | str | Required | 输出文件路径 |
 | `hz` | float | None | 录制频率 |
 | `async_mode` | bool | False | 后台处理 |
 

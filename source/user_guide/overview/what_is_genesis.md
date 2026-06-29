@@ -1,20 +1,16 @@
-# 💡 Genesis 是什么
+# 🌱 Genesis World 是什么
 
-```{figure} ../../_static/images/teaser.png
-```
+![Genesis World teaser](https://raw.githubusercontent.com/YilingQiao/Genesis/readme-assets/videos/HeroShot_Final.png)
 
-Genesis 是一个为通用*机器人/具身智能/物理AI*应用设计的物理平台。它集多种功能于一体：
+**Genesis World** 是面向物理 AI 开发的仿真平台。它把统一的多物理引擎、照片级真实渲染器 [Nyx](https://github.com/Genesis-Embodied-AI/genesis-nyx)，以及跨平台编译器 [Quadrants](https://github.com/Genesis-Embodied-AI/quadrants) 放在同一个 Pythonic 仿真接口之后。Genesis World 既能从单台笔记本上的 kernel 扩展到数据中心级 GPU，也保持了适合研究代码阅读、扩展和嵌入的接口。
 
-1. 一个从零开始重建的**通用物理引擎**，能够仿真各种材料和物理现象。
-2. 一个**轻量级**、**超高速**、**Pythonic**且**用户友好**的机器人仿真平台。
-3. 一个强大而快速的**照片级真实感渲染系统**。
-4. 一个**生成式数据引擎**，可将用户提示的自然语言描述转换为各种模态的数据。
+它以前名为 **Genesis**，最早是 2024 年 12 月启动的学术项目；现在其开发由 [Genesis AI](https://www.genesis.ai/) 正式支持。更多技术背景见我们的 [blog post](https://www.genesis.ai/blog/the-role-of-simulation-in-scalable-robotics-genesis-world-10-and-the-path-forward)。
 
-Genesis 基于一个从零开始重新设计和构建的通用物理引擎，将各种物理求解器及其耦合集成到一个统一的框架中。这个核心物理引擎进一步由一个在上层运行的生成式智能体框架增强，旨在实现机器人及其他领域完全**自动化的数据生成**。
-目前，我们正在开源底层物理引擎和仿真平台。生成式框架将在不久的将来发布。
+## 技术栈
 
-Genesis 的构建和持续发展遵循以下***长期使命***：
+Genesis World 包含四层。上层是你构建的机器人环境、机器学习流水线或智能体仿真；下层是你拥有的计算后端。
 
-1. **降低**使用物理仿真的门槛，让机器人研究对每个人都触手可及。（参见我们的[承诺](https://genesis-world.readthedocs.io/en/latest/user_guide/overview/mission.html)）
-2. 将**广泛的最先进物理求解器**统一到一个框架中，使用最先进的仿真技术，以最高的物理、视觉和感官保真度在虚拟世界中重现整个物理世界。
-3. **最小化**在收集和生成机器人及其他领域数据方面的人力投入，让数据飞轮自主运转。
+- **Simulation Interface**：面向用户的 API，包括资产解析（URDF、MJCF、OBJ、GLB、USD 等）、实体访问器、控制器、传感器、并行/异构环境和内置 GUI。
+- **Physics**：统一的多物理引擎，集成 Rigid、FEM、MPM、Particle（PBD / SPH）、[uipc](https://github.com/spiriMirror/libuipc)、显式耦合器和 SAP，并共享同一个场景与状态。
+- **Render**：三条渲染路径都作为相机传感器接入：**[Nyx](https://github.com/Genesis-Embodied-AI/genesis-nyx)**（Genesis 自研、面向机器人任务的渲染器）、**Luisa**（DSL 光线追踪器）和 **Pyrender**（光栅化器）。
+- **Compiler**：**[Quadrants](https://github.com/Genesis-Embodied-AI/quadrants)** 会把 Python kernel code 降低到 CUDA、AMD ROCm、Apple Metal、Vulkan、x86 和 ARM64，并承载 Genesis World 的自动微分、GPU graphs 和 fastcache 机制。

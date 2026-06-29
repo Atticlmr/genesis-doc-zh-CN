@@ -13,7 +13,9 @@ Genesis 提供灵活的记录系统用于捕获仿真数据。这支持数据日
 
 ## 快速开始
 
-### 录制视频
+### 录制相机视频
+
+从场景相机录制视频。录制开启后，每次调用 `cam.render()` 时都会自动捕获帧。
 
 ```python
 import genesis as gs
@@ -21,18 +23,17 @@ import genesis as gs
 gs.init()
 scene = gs.Scene()
 scene.add_entity(gs.morphs.Plane())
-scene.add_entity(gs.morphs.Box(pos=(0, 0, 1)))
+scene.add_entity(gs.morphs.Box(pos=(0, 0, 1), size=(1.0, 1.0, 1.0)))
+cam = scene.add_camera(res=(640, 480), pos=(3, 0, 2), lookat=(0, 0, 0.5))
 scene.build()
 
-# 开始录制
-scene.start_recording()
+cam.start_recording()
 
 for i in range(200):
     scene.step()
-    scene.visualizer.update()
+    cam.render()
 
-# 停止并保存
-scene.stop_recording(save_to="simulation.mp4")
+cam.stop_recording(save_to_filename="simulation.mp4")
 ```
 
 ### 录制自定义数据
@@ -50,7 +51,7 @@ def get_robot_state():
 scene.start_recording(
     data_func=get_robot_state,
     rec_options=gs.recorders.NPZFile(
-        filepath="robot_data.npz",
+        filename="robot_data.npz",
         hz=100,  # 录制频率
     ),
 )

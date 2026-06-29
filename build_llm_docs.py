@@ -58,10 +58,14 @@ MODULES = {
         "name": "传感与感知",
         "description": "传感器、相机、射线投射、批量渲染器和记录器",
         "files": [
-            "source/user_guide/getting_started/sensors.md",
-            "source/user_guide/getting_started/camera_sensors.md",
-            "source/user_guide/getting_started/raycaster_patterns.md",
-            "source/user_guide/getting_started/batch_renderer.md",
+            "source/user_guide/getting_started/sensors/index.md",
+            "source/user_guide/getting_started/sensors/imu.md",
+            "source/user_guide/getting_started/sensors/contact_and_tactile.md",
+            "source/user_guide/getting_started/sensors/raycaster.md",
+            "source/user_guide/getting_started/sensors/camera_sensors.md",
+            "source/user_guide/getting_started/sensors/proximity.md",
+            "source/user_guide/getting_started/sensors/temperature_grid.md",
+            "source/user_guide/getting_started/nyx_renderer.md",
             "source/user_guide/getting_started/recorders.md",
         ]
     },
@@ -69,11 +73,14 @@ MODULES = {
         "name": "强化学习训练",
         "description": "运动任务、无人机、操作任务和域随机化",
         "files": [
-            "source/user_guide/getting_started/locomotion.md",
-            "source/user_guide/getting_started/hover_env.md",
+            "source/user_guide/getting_started/policy_training/best_practices/index.md",
+            "source/user_guide/getting_started/policy_training/best_practices/efficient_environment.md",
+            "source/user_guide/getting_started/policy_training/best_practices/domain_randomization.md",
+            "source/user_guide/getting_started/policy_training/examples/index.md",
+            "source/user_guide/getting_started/policy_training/examples/locomotion.md",
+            "source/user_guide/getting_started/policy_training/examples/hover_env.md",
             "source/user_guide/getting_started/drone_entity.md",
-            "source/user_guide/getting_started/manipulation.md",
-            "source/user_guide/getting_started/domain_randomization.md",
+            "source/user_guide/getting_started/policy_training/examples/manipulation.md",
         ]
     },
     "07_assets_rendering": {
@@ -99,18 +106,22 @@ MODULES = {
         "files": [
             "source/user_guide/advanced_topics/concepts.md",
             "source/user_guide/advanced_topics/naming_and_variables.md",
-            "source/user_guide/advanced_topics/collision_contacts_forces.md",
+            "source/user_guide/advanced_topics/couplers/index.md",
+            "source/user_guide/advanced_topics/couplers/ipc_coupler.md",
+            "source/user_guide/advanced_topics/couplers/sap_coupler.md",
+            "source/user_guide/advanced_topics/rigid_collision/index.md",
+            "source/user_guide/advanced_topics/rigid_collision/collision_contacts_forces.md",
+            "source/user_guide/advanced_topics/rigid_collision/rigid_constraint_model.md",
             "source/user_guide/advanced_topics/solvers_and_coupling.md",
-            "source/user_guide/advanced_topics/ipc_coupler.md",
-            "source/user_guide/advanced_topics/sap_coupler.md",
-            "source/user_guide/advanced_topics/rigid_constraint_model.md",
             "source/user_guide/advanced_topics/nonrigid_models.md",
             "source/user_guide/advanced_topics/support_field.md",
+            "source/user_guide/advanced_topics/sensors/index.md",
+            "source/user_guide/advanced_topics/sensors/sensor_pipeline.md",
+            "source/user_guide/advanced_topics/sensors/custom_sensors.md",
             "source/user_guide/advanced_topics/checkpoints.md",
             "source/user_guide/advanced_topics/mesh_processing.md",
             "source/user_guide/advanced_topics/multi_gpu.md",
             "source/user_guide/advanced_topics/profiling.md",
-            "source/user_guide/advanced_topics/parallel_RL_training.md",
         ]
     },
     "10_api_core": {
@@ -314,13 +325,6 @@ MODULES = {
             "source/api_reference/differentiation/creation_ops.md",
         ]
     },
-    "19_roadmap": {
-        "name": "路线图",
-        "description": "Genesis 项目的发展路线图",
-        "files": [
-            "source/roadmap/index.md",
-        ]
-    },
 }
 
 
@@ -410,7 +414,7 @@ def generate_index(modules, output_dir):
     lines.append("=" * 80)
     lines.append("")
     lines.append("本文档是 Genesis 物理仿真引擎的中文文档，专为 LLM 处理优化。")
-    lines.append("文档按功能模块组织，共包含 19 个模块。")
+    lines.append(f"文档按功能模块组织，共包含 {len(modules)} 个模块。")
     lines.append("")
     lines.append("-" * 80)
     lines.append("模块列表")

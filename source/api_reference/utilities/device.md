@@ -2,20 +2,6 @@
 
 用于检测和配置计算平台和设备的函数。
 
-## 平台检测
-
-```python
-import genesis as gs
-
-# Get platform before init
-platform = gs.get_platform()
-print(platform)  # "Linux", "macOS", or "Windows"
-
-# After init, access global
-gs.init()
-print(gs.platform)  # Same result
-```
-
 ## 设备信息
 
 ```python
@@ -70,10 +56,9 @@ gs.set_random_seed(42)
 
 | Variable | Type | Description |
 |----------|------|-------------|
-| `gs.platform` | str | 平台: "Linux", "macOS", "Windows" |
 | `gs.device` | torch.device | PyTorch 张量设备 |
 | `gs.backend` | gs.backend | 活动计算后端 |
-| `gs.EPS` | float | 数值 epsilon（例如，1e-15） |
+| `gs.EPS` | float | 当前精度下的机器 epsilon |
 
 ## 类型提示
 

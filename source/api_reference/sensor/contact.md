@@ -1,10 +1,10 @@
 # 接触传感器
 
-Genesis 提供用于检测和测量接触力的传感器。这些对于操作任务、抓取和理解物理交互至关重要。
+Genesis 提供用于检测接触和测量接触力的传感器。这些传感器适用于操作、抓取以及理解物理交互。
 
 ## ContactForceSensor
 
-`ContactForceSensor` 测量指定连杆上接触点的力和力矩。
+`ContactForceSensor` 测量施加在关联刚体连杆上的总接触力，并以该连杆的局部坐标系返回。
 
 ### 用法
 
@@ -14,52 +14,82 @@ import genesis as gs
 gs.init()
 scene = gs.Scene()
 robot = scene.add_entity(gs.morphs.URDF(file="gripper.urdf"))
-scene.build()
+finger = robot.get_link("finger_link")
 
 # 添加接触力传感器到夹爪手指
-finger = robot.get_link("finger_link")
 contact_sensor = scene.add_sensor(
     gs.sensors.ContactForce(
-        link=finger,
+        entity_idx=robot.idx,
+        link_idx_local=finger.idx_local,
     )
 )
 
-# 仿真循环
+scene.build()
+
 for i in range(1000):
     scene.step()
 
-    # 获取接触力数据
-    force_data = contact_sensor.get_data()
-    print(f"Contact force: {force_data}")
+    # 获取接触力；返回普通 tensor，不是 NamedTuple
+    force = contact_sensor.read()  # ([n_envs,] 3)，单位 Newton
+    print(f"Contact force: {force}")
 ```
 
 ### 配置
 
 ```python
 gs.sensors.ContactForce(
-    link=link,              # 附加传感器的 RigidLink
-    frame="world",          # 参考坐标系："world" 或 "local"
-    noise_pos=0.0,          # 位置噪声标准差
-    noise_quat=0.0,         # 方向噪声标准差
+    entity_idx=robot.idx,            # 全局 entity 索引
+    link_idx_local=finger.idx_local, # 局部 link 索引
+    pos_offset=(0.0, 0.0, 0.0),      # 相对于 link 坐标系的位置偏移
+    euler_offset=(0.0, 0.0, 0.0),    # 旋转偏移（度）
+    min_force=0.0,                   # 每轴最小可检测绝对力，低于该值返回 0
+    max_force=float("inf"),          # 每轴最大输出绝对力，超过该值会裁剪
+    noise=0.0,                       # 白噪声标准差
+    bias=0.0,                        # 常量加性偏置
+    draw_debug=True,
 )
 ```
 
+### 输出格式
+
+`read()` 返回普通 `torch.Tensor` (float32)：
+
+| 形状 | 描述 |
+|-------|-------------|
+| `([n_envs,] 3)` | 局部 link 坐标系中的总接触力，单位 Newton |
+
 ## ContactSensor
 
-`ContactSensor` 检测接触事件（碰撞开始/结束）而不测量力。
+`ContactSensor` 检测关联刚体连杆是否处于接触状态，返回布尔值。
 
 ### 用法
 
 ```python
+import genesis as gs
+
+gs.init()
+scene = gs.Scene()
+robot = scene.add_entity(gs.morphs.URDF(file="robot.urdf"))
+
 contact = scene.add_sensor(
     gs.sensors.Contact(
-        link=robot.get_link("base"),
+        entity_idx=robot.idx,
+        link_idx_local=robot.get_link("base").idx_local,
     )
 )
 
+scene.build()
 scene.step()
-contacts = contact.get_data()
+in_contact = contact.read()  # ([n_envs,] 1) bool tensor
 ```
+
+### 输出格式
+
+`read()` 返回普通 `torch.Tensor` (bool)：
+
+| 形状 | 描述 |
+|-------|-------------|
+| `([n_envs,] 1)` | link 处于接触时为 True |
 
 ## API 参考
 

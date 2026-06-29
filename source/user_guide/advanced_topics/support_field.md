@@ -69,4 +69,4 @@ v_ws, idx = s_field._func_support_world(dir_ws, i_geom, i_env)
 
 Support Field 是一个**加速结构**，专门被*凸体-凸体*精阶段使用。其他碰撞路径 – SDF、地形、平面-盒体 – 绕过它，因为它们要么依赖解析支持函数，要么依赖距离场。
 
-有关 MPR 如何集成此结构的详细信息，请参见 {doc}`碰撞、接触与力 <collision_contacts_forces>`。
+有关 MPR 如何集成此结构的详细信息，请参见 {doc}`碰撞、接触与力 <rigid_collision/collision_contacts_forces>`。

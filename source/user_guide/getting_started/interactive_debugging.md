@@ -1,4 +1,66 @@
-# 🧑‍💻 交互式信息访问与调试
+# 🧑‍💻 交互式 GUI 与调试
+
+:::{note}
+使用下面的 GUI 功能前，请先安装可选的 `imgui-bundle` 依赖。ImGui 覆盖面板随 Genesis 的 `render` extras 提供：
+
+```bash
+pip install "genesis-world[render]"
+```
+
+如果忘记安装却设置了 `enable_gui=True`，或手动调用 `ImGuiOverlayPlugin()`，Genesis 会给出可操作的错误信息并提示上述安装命令。`imgui-bundle` 并不为所有 Python/操作系统组合发布预编译 wheel，例如 Python 3.10 + Linux aarch64；这些平台可通过 `pip install imgui-bundle` 手动安装，它会从源码构建并需要 CMake。
+:::
+
+## ImGui 覆盖面板插件
+
+**`ImGuiOverlayPlugin`** 会在原生 pyrender viewer 上添加 Dear ImGui 覆盖层。它提供以下交互式面板：
+
+- 仿真控制：播放、暂停、单步、重置。
+- 实体浏览器：每个 DOF 的关节滑块、自由关节四元数组，以及可视化模式切换（visual / collision / wireframe）。
+- 相机位置和 lookat 滑块、阴影/坐标系/视锥体显示开关，以及光栅化渲染标志覆盖（法线覆盖、线框覆盖）。
+- 场景重建按钮：使用当前实体清单重新运行 `scene.build()`，便于在不重启脚本的情况下迭代 URDF/MJCF。
+
+```python
+from genesis.ext.pyrender.overlay import ImGuiOverlayPlugin
+
+plugin = ImGuiOverlayPlugin()
+scene.viewer.add_plugin(plugin)
+```
+
+你可以用 `plugin.register_panel(callback)` 注册自己的面板。回调会收到实时 ImGui 模块，并可调用其中任意 widget：
+
+```python
+def custom_panel(imgui):
+    imgui.text("Custom Demo Panel")
+    if imgui.button("Trigger something"):
+        ...
+
+plugin.register_panel(custom_panel)
+```
+
+完整示例脚本位于 `examples/gui/imgui_joint_control.py`。它加载 Franka 机械臂和一个盒子，演示实体浏览器、仿真控制，以及通过 `register_panel` 注册的自定义面板。
+
+<video preload="auto" controls="True" width="100%">
+<source src="../../_static/videos/viewer_plugin_imgui_overlay.mp4" type="video/mp4">
+</video>
+
+## 在任意示例中启用 GUI 面板
+
+如果只是想在现有示例上显示面板，而不写插件样板代码，可以在 `ViewerOptions` 上设置 `enable_gui=True`。viewer 会自动为你挂载 `ImGuiOverlayPlugin`：
+
+```python
+scene = gs.Scene(
+    viewer_options=gs.options.ViewerOptions(
+        camera_pos=(0, -3.5, 2.5),
+        camera_lookat=(0.0, 0.0, 0.5),
+        camera_fov=40,
+        max_FPS=60,
+        enable_gui=True,
+    ),
+    show_viewer=True,
+)
+```
+
+## 交互式信息访问
 
 我们设计了一个信息丰富（希望也很美观）的界面，用于访问内部信息和 Genesis 中创建的所有对象的可用属性，通过所有 Genesis 类的 `__repr__()` 方法实现。如果您习惯使用 `IPython`、`pdb` 或 `ipdb` 进行调试，这个功能将非常有用。
 

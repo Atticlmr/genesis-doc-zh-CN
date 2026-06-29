@@ -152,7 +152,112 @@ for i in range(120):
     cam.render()
 cam.stop_recording(save_to_filename='video.mp4', fps=60)
 ```
-## 照片级真实感光线追踪渲染
+## 使用 Nyx 进行照片级真实渲染
+
+[Nyx](https://github.com/Genesis-Embodied-AI/genesis-nyx) 是专为 Genesis 构建的 GPU 加速路径追踪器。与下面的 LuisaRender 后端不同，Nyx 以**相机传感器**的形式接入，而不是作为全局 scene renderer：你向场景添加 `NyxCameraOptions` 传感器，然后从 `cam.read().rgb` 读取图像。它支持 PBR 材质、HDRI 光照、3D Gaussian splat 资产、连接/多相机设置、多环境渲染以及逐像素对象拾取。
+
+### 安装
+
+Nyx 以 `gs-nyx` 包发布：
+
+```bash
+pip install gs-nyx
+```
+
+```{note}
+`gs-nyx` 当前在项目准备公开发布期间通过内部包索引分发。wheel 发布到 PyPI 后，公开安装说明会在 [Nyx 仓库](https://github.com/Genesis-Embodied-AI/genesis-nyx) 中提供。
+```
+
+安装后，可通过同时导入 Genesis 和 Nyx 插件来验证：
+
+```python
+import genesis as gs
+import gs_nyx.nyx_py_renderer as npr
+import gs_nyx.nyx_py_sdk as nps
+from gs_nyx_plugin.nyx_camera_options import NyxCameraOptions
+```
+
+### 最小示例
+
+下面的片段会在 HDRI 环境贴图照明下渲染平面上的 PBR 球体，是 Nyx 的典型 “hello world”。它对应 Nyx 仓库中的 [`examples/01_hello_nyx.py`](https://github.com/Genesis-Embodied-AI/genesis-nyx/blob/main/examples/01_hello_nyx.py)。
+
+```{image} ../../_static/images/nyx_hello.png
+:alt: PBR ball rendered with Nyx under an HDRI environment map
+:align: center
+:width: 80%
+```
+
+```python
+import os
+from PIL import Image
+
+import genesis as gs
+import gs_nyx.nyx_py_renderer as npr
+import gs_nyx.nyx_py_sdk as nps
+from gs_nyx_plugin.nyx_camera_options import NyxCameraOptions
+
+
+HERE        = os.path.dirname(__file__)
+PBR_BALL    = os.path.join(HERE, "assets", "PBR_Ball.glb")
+ENV_MAP     = os.path.join(HERE, "assets", "kloppenheim_07_puresky_4k.hdr")
+OUTPUT_PATH = os.path.join(HERE, "out", "01_hello_nyx.png")
+
+
+def main():
+    gs.init()
+
+    scene = gs.Scene(
+        sim_options=gs.options.SimOptions(dt=0.01),
+        show_viewer=False,
+    )
+
+    scene.add_entity(morph=gs.morphs.Plane(plane_size=(10.0, 10.0)))
+    scene.add_entity(
+        morph=gs.morphs.Mesh(file=PBR_BALL, pos=(0.0, 0.0, 0.0)),
+        surface=gs.surfaces.Gold(),
+    )
+
+    env_map            = nps.EnvironmentMapAsset()
+    env_map.texture    = ENV_MAP
+    env_map.layout     = nps.EEnvMapLayout.LongLat
+    env_map.multiplier = 8
+
+    cam = scene.add_sensor(NyxCameraOptions(
+        res         = (1920, 1080),
+        pos         = (-1.0, 1.0, 1.2),
+        lookat      = (0.0, 0.0, 0.1),
+        fov         = 20.0,
+        spp         = 64,
+        render_mode = npr.ERenderMode.FastPathTracer,
+        env_maps    = (env_map,),
+    ))
+
+    scene.build(n_envs=1)
+    scene.step()  # 渲染在仿真 step 中发生
+
+    rgb = cam.read().rgb[0].cpu().numpy()
+    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
+    Image.fromarray(rgb).save(OUTPUT_PATH)
+    print(f"Saved {OUTPUT_PATH}")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+需要注意：
+
+- **Nyx 是传感器。** 它通过 `scene.add_sensor(NyxCameraOptions(...))` 注册，而不是全局 renderer 后端。
+- **渲染发生在 `scene.step()` 中。** 通过 `cam.read().rgb` 读取帧；这是一个 torch 张量，每个环境一张图。
+- **`spp`**（每像素采样数）和 **`render_mode`** 会在质量与速度之间取舍；`FastPathTracer` 是迭代时的良好默认值。
+
+更多高级功能（Gaussian splats、多相机、对象拾取等）见专门的 [Nyx 渲染器](nyx_renderer.md) 页面和 [Nyx 文档站点](https://genesis-embodied-ai.github.io/genesis-nyx/)。
+
+```{note}
+**路线图。** Genesis 正在把光栅化和路径追踪统一到 Nyx 这个基于传感器的渲染接口下。Nyx 会逐步替代下面记录的 LuisaRender 后端以及默认的 Pyrender 光栅化器；未来 Genesis 中所有基于相机的渲染都会通过 Nyx。
+```
+
+## 使用 Luisa 的照片级真实渲染（逐步弃用）
 
 Genesis 提供光线追踪渲染后端以实现照片级真实感渲染。您可以在创建场景时通过设置 `renderer=gs.renderers.RayTracer()` 轻松切换到使用此后端。此相机允许更多参数调整，如 `spp`、`aperture`、`model` 等。
 

@@ -36,17 +36,18 @@ fluid = scene.add_entity(
     gs.morphs.Box(pos=(0, 0, 0.5), size=(0.4, 0.4, 0.4)),
     material=gs.materials.SPH.Liquid(
         rho=1000,     # Density (密度)
-        viscosity=0.01,
+        mu=0.01,
     ),
 )
 
 # Add rigid container
-container = scene.add_entity(gs.morphs.Box(
-    pos=(0, 0, 0.5),
-    size=(0.5, 0.5, 0.5),
-    is_rigid=True,
+container = scene.add_entity(
+    gs.morphs.Box(
+        pos=(0, 0, 0.5),
+        size=(0.5, 0.5, 0.5),
+    ),
     vis_mode="collision",
-))
+)
 
 scene.build()
 
@@ -70,7 +71,7 @@ for i in range(1000):
 | Parameter | Description | Typical Range |
 |-----------|-------------|---------------|
 | `rho` | Rest density (静止密度) | 1000 kg/m^3 (water) |
-| `viscosity` | Dynamic viscosity (动力粘度) | 0.001-0.1 |
+| `mu` | Dynamic viscosity (动力粘度) | 0.001-0.1 |
 | `stiffness` | Pressure stiffness (压力刚度) | 1000-10000 |
 
 ## 另请参阅

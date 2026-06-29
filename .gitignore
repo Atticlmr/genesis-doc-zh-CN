@@ -1,3 +1,6 @@
 .DS_Store
 build
 source/user_guide/reference/_autosummary/
+.venv/
+__pycache__/
+llm_docs/

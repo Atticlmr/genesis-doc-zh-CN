@@ -117,5 +117,5 @@ for _ in range(500):
 ```
 ## 下一章节
 
-- [悬停环境](./hover_env) — 创建无人机悬停强化学习环境
-- [运动控制](./locomotion) — 使用Genesis和强化学习训练locomotion策略
+- [悬停环境](./policy_training/examples/hover_env) — 创建无人机悬停强化学习环境
+- [运动控制](./policy_training/examples/locomotion) — 使用 Genesis 和强化学习训练 locomotion 策略
